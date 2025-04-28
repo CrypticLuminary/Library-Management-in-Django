@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+</head>
+<body>
+
+<h1>Book List</h1>
+
+<!-- Search Form -->
+<form method="get" action="">
+    <input type="text" name="search" placeholder="Search books..." value="{{ search_query }}">
+    <button type="submit">Search</button>
+</form>
+
+<hr>
+
+<!-- Book List -->
+{% if books %}
+    <ul>
+        {% for book in books %}
+            <li>
+                <h2>{{ book.title }}</h2>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Publication Date:</strong> {{ book.publication_date }}</p>
+
+                {% if book.image %}
+                    <img src="{{ book.image.url }}" alt="{{ book.title }}" width="150">
+                {% else %}
+                    <p>No cover image</p>
+                {% endif %}
+
+                {% if book.book_upload %}
+                    <p><a href="{{ book.book_upload.url }}" download>Download Book</a></p>
+                {% else %}
+                    <p>No book file uploaded</p>
+                {% endif %}
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No books found.</p>
+{% endif %}
+
+</body>
+</html>

@@ -40,7 +40,7 @@ def Userlogin(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('book:book_list')
             else:
                 messages.error(request, "Invalid Email or Password.")
 
